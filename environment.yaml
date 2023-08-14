@@ -1,0 +1,21 @@
+name: base
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - numpy
+  - dask
+  - ipdb
+  - pandas
+  - arm_pyart
+  - wradlib
+  - matplotlib
+  - xarray
+  - seaborn
+  - cartopy
+  - h5py
+  - netcdf4
+  - scipy
+  - pyproj
+  - opencv
+  - pysteps
