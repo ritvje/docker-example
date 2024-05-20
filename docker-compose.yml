@@ -10,7 +10,7 @@ services:
       # IPython history (touch $HOME/.ipython/profile_default; chmod a+rw -R $HOME/.ipython/)
       - $HOME/.ipython/:/home/mambauser/.ipython/
       # Python history (touch $HOME/.python_history; chmod a+rw $HOME/.python_history)
-      - $HOME/.python_history:/home/mambauser/.python_history
+      - $HOME/.python_history:/.python_history
       # Other directories
       - .:/code
       # - /arch/radarraw:/arch/radarraw
