@@ -7,8 +7,16 @@ The container is based on the `mambaorg/micromamba:1-alpine` image. Container si
 ## Usage:
 
 1. Update the conda environment file `environment.yml` with the correct packages.
-2. Update the `docker-compose.yml` file with correct mount paths.
-3. Build and run the container as described below.
+2. Update Dockerfile with correct user information, if needed. (User and group id can be found with `id -u` and `id -g` commands.)
+
+   ```Dockerfile
+    ARG NEW_MAMBA_USER=<username>
+    ARG NEW_MAMBA_USER_ID=<user-id>
+    ARG NEW_MAMBA_USER_GID=<group-id>
+   ```
+
+3. Update the `docker-compose.yml` file with correct mount paths.
+4. Build and run the container as described below.
 
 ## With `docker compose`
 
@@ -25,3 +33,10 @@ docker buildx build --pull --rm -f "Dockerfile" -t docker:latest "."
 # Run
 docker run --rm -it --entrypoint /bin/bash -w /code docker:latest
 ```
+
+## In VSCode
+
+1. Install the Docker extension.
+2. Open the repository in VSCode.
+3. Right-click on the `docker-compose.yml` file and select `Compose Up`.
+4. Go to Docker tab and right-click on the container and select `Attaach shell`.

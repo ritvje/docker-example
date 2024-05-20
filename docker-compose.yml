@@ -1,13 +1,38 @@
-version: "3"
-
 services:
   radar-app:
+    # user: "<uid>:<gid>"
     build: .
     volumes:
+      # For keeping the shell history
+      # In the following, update target paths with new user name if changed
+      # Bash history (create host file with touch $HOME/.docker_bash_history; chmod a+rw $HOME/.docker_bash_history)
+      - $HOME/.docker_bash_history:/home/mambauser/.bash_history
+      # IPython history (touch $HOME/.ipython/profile_default; chmod a+rw -R $HOME/.ipython/)
+      - $HOME/.ipython/:/home/mambauser/.ipython/
+      # Python history (touch $HOME/.python_history; chmod a+rw $HOME/.python_history)
+      - $HOME/.python_history:/home/mambauser/.python_history
+      # Other directories
       - .:/code
-      - /arch/radar:/arch/radar
-      # - results:/code/results
+      # - /arch/radarraw:/arch/radarraw
+    entrypoint: bash
+    working_dir: /code
+    stdin_open: true # docker run -i
+    tty: true # docker run -t
+    environment:
+      # Set path to allow running python with other user than mambauser
+      # PATH: "/opt/conda/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      # history file
+      HISTFILE: /home/mambauser/.bash_history
+      # PYART_CONFIG: /code/.pyart_config.py
+
+  classify:
+    # user: "<uid>:<gid>"
+    image: "quay.io/fmi/optclass:latest"
+    volumes:
+      - ./data:/data
+      - ./output:/output
     entrypoint:
       - /bin/bash
+    # command: "classify $INFILE $OUTFILE"
     stdin_open: true # docker run -i
     tty: true # docker run -t
