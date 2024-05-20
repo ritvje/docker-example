@@ -8,7 +8,7 @@ services:
       # Bash history (create host file with touch $HOME/.docker_bash_history; chmod a+rw $HOME/.docker_bash_history)
       - $HOME/.docker_bash_history:/home/mambauser/.bash_history
       # IPython history (touch $HOME/.ipython/profile_default; chmod a+rw -R $HOME/.ipython/)
-      - $HOME/.ipython/:/home/mambauser/.ipython/
+      - $HOME/.ipython/:/.ipython/
       # Python history (touch $HOME/.python_history; chmod a+rw $HOME/.python_history)
       - $HOME/.python_history:/.python_history
       # Other directories
